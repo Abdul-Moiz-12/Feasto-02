@@ -88,6 +88,42 @@
   gap: 18px;
 }
 
+.auth-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.auth-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 0;
+  color: #555;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-nav-link:hover,
+.auth-nav-link.active {
+  color: #e53935;
+}
+
+.signup-link {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #e53935;
+  color: #fff;
+  box-shadow: 0 7px 15px rgba(229, 57, 53, 0.16);
+}
+
+.signup-link:hover,
+.signup-link.active {
+  color: #fff;
+  background: #c92f2c;
+}
+
 .cart-link,
 .dashboard-link,
 .primary-button,

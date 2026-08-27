@@ -31,6 +31,16 @@ export function Header({ cartCount }) {
         </nav>
 
         <div className="nav-actions">
+          <div className="auth-nav-links" aria-label="Account navigation">
+            <NavLink to="/login" className={({ isActive }) => (isActive ? 'auth-nav-link active' : 'auth-nav-link')}>
+              <i className="fa-regular fa-user" aria-hidden="true" />
+              <span>Login</span>
+            </NavLink>
+            <NavLink to="/signup" className={({ isActive }) => (isActive ? 'auth-nav-link signup-link active' : 'auth-nav-link signup-link')}>
+              <span>Sign up</span>
+              <i className="fa-solid fa-arrow-right" aria-hidden="true" />
+            </NavLink>
+          </div>
           <NavLink to="/cart" className="cart-link">
             <span>Cart</span>
             <strong>{cartCount}</strong>
