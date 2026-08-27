@@ -10,9 +10,12 @@ import { MenuPage } from './components/pages/MenuPage'
 import { ProductPage } from './components/pages/ProductPage'
 import { AboutPage, ContactPage, OffersPage } from './components/pages/SecondaryPages'
 import { AdminApp } from './components/admin/AdminApp'
+import { ScrollMotion } from './components/motion/ScrollMotion'
+import { AuthPage } from './components/pages/AuthPage'
 import { menuItems as initialMenuItems } from './data/menuData'
 
 function App() {
+  const [authUser, setAuthUser] = useState(null)
   const [menuItems, setMenuItems] = useState(initialMenuItems)
   const [cart, setCart] = useState([
     { id: 1, name: 'Truffle Smash Burger', quantity: 1, price: 18.5 },
@@ -57,12 +60,14 @@ function App() {
         removeItem={removeItem}
         menuItems={menuItems}
         setMenuItems={setMenuItems}
+        authUser={authUser}
+        setAuthUser={setAuthUser}
       />
     </BrowserRouter>
   )
 }
 
-function FeastoApp({ cart, cartCount, addToCart, updateQuantity, removeItem, menuItems, setMenuItems }) {
+function FeastoApp({ cart, cartCount, addToCart, updateQuantity, removeItem, menuItems, setMenuItems, authUser, setAuthUser }) {
   const location = useLocation()
 
   const subtotal = useMemo(
@@ -85,14 +90,16 @@ function FeastoApp({ cart, cartCount, addToCart, updateQuantity, removeItem, men
           <Route path="/cart" element={<CartPage cart={cart} updateQuantity={updateQuantity} removeItem={removeItem} subtotal={subtotal} />} />
           <Route path="/checkout" element={<CheckoutPage subtotal={subtotal} />} />
           <Route path="/order-success" element={<OrderSuccessPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<AuthPage mode="login" onAuthenticated={setAuthUser} />} />
+          <Route path="/signup" element={<AuthPage mode="signup" onAuthenticated={setAuthUser} />} />
+          <Route path="/profile" element={<ProfilePage authUser={authUser} />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/admin/*" element={<AdminApp menuItems={menuItems} setMenuItems={setMenuItems} cart={cart} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+
+      <ScrollMotion />
 
       {location.pathname.startsWith('/admin') ? null : <Footer />}
     </div>
@@ -225,55 +232,10 @@ function OrderSuccessPage() {
   )
 }
 
-function LoginPage() {
-  return (
-    <section className="container simple-page auth-page">
-      <div className="auth-card">
-        <h2>Welcome back</h2>
+function ProfilePage({ authUser }) {
+  const displayName = authUser?.user_metadata?.full_name || authUser?.email?.split('@')[0] || 'Abdul Moiz'
+  const email = authUser?.email || 'abdul@example.com'
 
-        <label>
-          Email
-          <input type="email" defaultValue="hello@feasto.com" />
-        </label>
-
-        <label>
-          Password
-          <input type="password" defaultValue="password" />
-        </label>
-
-        <NavLink to="/profile" className="primary-button button-link center-button">
-          Sign in
-        </NavLink>
-      </div>
-    </section>
-  )
-}
-
-function SignupPage() {
-  return (
-    <section className="container simple-page auth-page">
-      <div className="auth-card">
-        <h2>Create account</h2>
-
-        <label>
-          Full name
-          <input type="text" defaultValue="Abdul Moiz" />
-        </label>
-
-        <label>
-          Email
-          <input type="email" defaultValue="abdul@example.com" />
-        </label>
-
-        <NavLink to="/profile" className="primary-button button-link center-button">
-          Create account
-        </NavLink>
-      </div>
-    </section>
-  )
-}
-
-function ProfilePage() {
   return (
     <section className="container simple-page">
       <h2>My profile</h2>
@@ -281,8 +243,8 @@ function ProfilePage() {
       <div className="info-grid">
         <div className="info-card">
           <h3>Account</h3>
-          <p>Abdul Moiz</p>
-          <p>abdul@example.com</p>
+          <p>{displayName}</p>
+          <p>{email}</p>
         </div>
 
         <div className="info-card">
