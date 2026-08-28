@@ -16,7 +16,7 @@ function AdminPanel({ title, cart = [], menuItems = [] }) {
   )
 }
 
-export function AdminApp({ menuItems, setMenuItems, cart }) {
+export function AdminApp({ authUser, menuItems, setMenuItems, cart }) {
   const location = useLocation()
 
   return (
@@ -39,7 +39,7 @@ export function AdminApp({ menuItems, setMenuItems, cart }) {
           {adminNavItems.slice(8).map((item) => <NavLink key={item.to} to={item.to} className={({ isActive }) => (isActive ? 'admin-link active' : 'admin-link')}><span className="admin-link-icon" aria-hidden="true"><i className={`fa-solid ${item.label === 'Users' ? 'fa-user-gear' : item.label === 'Staff' ? 'fa-user-group' : 'fa-gear'}`} /></span>{item.label}</NavLink>)}
         </nav>
         <div className="admin-upgrade"><strong>Upgrade to Pro</strong><p>Unlock advanced analytics, reports and more features.</p><NavLink to="/admin/reports">Upgrade Now</NavLink></div>
-        <div className="admin-user"><span>AM</span><div><strong>Abdul Moiz</strong><small>Super Admin</small></div><b><i className="fa-solid fa-chevron-down" aria-hidden="true" /></b></div>
+        <div className="admin-user"><span>{(authUser.user_metadata?.full_name || authUser.email || 'Admin').split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase()}</span><div><strong>{authUser.user_metadata?.full_name || authUser.email}</strong><small>Super Admin</small></div><b><i className="fa-solid fa-chevron-down" aria-hidden="true" /></b></div>
       </aside>
 
       <main className="admin-content" data-route={location.pathname}>

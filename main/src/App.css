@@ -94,6 +94,14 @@
   gap: 14px;
 }
 
+.account-nav { display: flex; align-items: center; gap: 12px; }
+.account-link { display: inline-flex; align-items: center; gap: 8px; color: #171717; font-size: 0.82rem; font-weight: 700; text-decoration: none; }
+.header-avatar, .profile-avatar, .profile-summary-avatar { display: inline-flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 50%; background: #171717; color: #fff; font-weight: 800; }
+.header-avatar { width: 34px; height: 34px; font-size: 0.72rem; }
+.header-avatar img, .profile-avatar img, .profile-summary-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.signout-button { border: 0; background: transparent; color: #777; font-size: 0.75rem; cursor: pointer; }
+.signout-button:hover { color: #e53935; }
+
 .auth-nav-link {
   display: inline-flex;
   align-items: center;
@@ -1248,6 +1256,24 @@
   color: #6f6f6f;
   line-height: 1.6;
 }
+
+.profile-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.profile-heading h2 { margin-bottom: 8px; }
+.profile-heading p:last-child { margin: 0; color: #6f6f6f; }
+.profile-avatar { width: 82px; height: 82px; flex: 0 0 auto; background: #e53935; font-size: 1.35rem; }
+.profile-form { display: grid; gap: 14px; }
+.profile-form h3 { margin-bottom: 2px; }
+.profile-form label { display: grid; gap: 6px; color: #555; font-size: 0.8rem; font-weight: 700; }
+.profile-form input, .profile-form textarea { width: 100%; border: 1px solid #e2e2df; border-radius: 10px; padding: 11px 12px; color: #171717; background: #fcfcfb; }
+.profile-form input:focus, .profile-form textarea:focus { outline: 2px solid rgba(229, 57, 53, 0.2); border-color: #e53935; }
+.profile-form button { width: fit-content; margin-top: 4px; border: 0; }
+.profile-summary { text-align: center; }
+.profile-summary-avatar { width: 86px; height: 86px; margin: 8px auto 18px; background: #e53935; font-size: 1.4rem; }
+.profile-summary > strong { display: block; font-size: 1.2rem; }
+.profile-summary > p { margin-top: 6px; }
+.role-badge { display: inline-block; margin-top: 14px; padding: 6px 10px; border-radius: 999px; background: #fff0ef; color: #c92f2c; font-size: 0.72rem; font-weight: 800; }
+.profile-note { margin-top: 26px !important; padding-top: 18px; border-top: 1px solid #ededeb; font-size: 0.8rem; }
+.profile-message { color: #27804c !important; font-size: 0.8rem; }
 
 .offer-card {
   display: flex;
